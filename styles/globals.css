@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Maven+Pro:wght@400;500;600;900&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+  font-family: 'Maven Pro', sans-serif;
+}
+body{
+  background: white;
+}
+
+li{
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+}
+li:hover::before{
+position: absolute;
+content: "";
+height: 4px;
+width: 100%;
+background: #2a68ff;
+right: 0;
+bottom:-10px;
+color: #2a68ff;
+}
+
+.icon{
+  cursor: pointer;
+}
+.card{
+  background: url("/logos/testimonial.png");
+} 
+.card1{
+  background: url("/logos/Tbackground.png");
+  
+}
