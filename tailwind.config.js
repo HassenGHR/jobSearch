@@ -16,6 +16,5 @@ module.exports = {
     },
   },
   plugins: [],
-  optimizeCss: false, 
-  enableBabelRuntime: true,
+
 }
