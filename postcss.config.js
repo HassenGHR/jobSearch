@@ -3,5 +3,7 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
   },
+  optimizeCss: false, 
+  enableBabelRuntime: true,
   
 }
