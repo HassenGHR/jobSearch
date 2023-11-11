@@ -52,7 +52,7 @@ const DummyDataCard = (props) => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       const previousPage = currentPage - 1;
-      router.push(`http://localhost:3001/companies?currentPage=${previousPage}`);
+      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/companies?currentPage=${previousPage}`);
       
     }
   };
@@ -61,7 +61,7 @@ const DummyDataCard = (props) => {
     if (currentPage < totalPages) {
       const nextPage = currentPage + 1;
       setCurrentPage(currentPage + 1);
-      router.push(`http://localhost:3001/companies?currentPage=${nextPage}`);
+      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/companies?currentPage=${nextPage}`);
     }
   };
   const maxPaginationButtons = 7;

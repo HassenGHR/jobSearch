@@ -134,7 +134,7 @@ const ApplyOffer = (props) => {
               text-white cursor-pointer hover:bg-blue-300"
               >
                 <a
-                  href={`https://wassitonline.anem.dz/DetailOffer/${props.offerId}`}
+                  href={`${process.env.NEXT_PUBLIC_OFFER_URL}/${props.offerId}`}
                 >
                   Apply Now
                 </a>

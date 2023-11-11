@@ -7,7 +7,6 @@ import Link from "next/link";
 // import { imageDefault } from "../../public/logos/default.jpg";
 
 const Jobs = (props) => {
-
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchResults, setSearchResults] = useState(props.offers);
@@ -38,9 +37,9 @@ const Jobs = (props) => {
   }
   const { jobTitle, company, location, sortSearch, type, level } =
     props.queryData;
-    useEffect(() => {
-      setCurrentPage(1);
-    }, [jobTitle, company, location, sortSearch, type, level]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [jobTitle, company, location, sortSearch, type, level]);
 
   useEffect(() => {
     // Filter jobs based on search criteria
@@ -61,7 +60,7 @@ const Jobs = (props) => {
 
       let levelMatchesCriteria = true;
 
-      if (experience !== null ) {
+      if (experience !== null) {
         // Determine the experience level based on the criteria
         if (level === "Débutant") {
           levelMatchesCriteria = job.experience >= 0 && job.experience <= 1;
@@ -80,11 +79,8 @@ const Jobs = (props) => {
       // Display jobs that match jobMatchesCriteria, typeMatchesCriteria,
       // and levelMatchesCriteria (based on experience level)
       return jobMatchesCriteria && typeMatchesCriteria && levelMatchesCriteria;
-     
     });
- 
 
-   
     if (sortSearch === "Date de publication") {
       const sortedJobs = [...filteredJobs];
       sortedJobs.sort((a, b) => new Date(b.time) - new Date(a.time));
@@ -108,10 +104,8 @@ const Jobs = (props) => {
     } else {
       // If no sorting option is selected, set searchResults to filteredJobs
       setSearchResults(filteredJobs);
-     
     }
     setLoading(false);
- 
   }, [props.queryData, props.offers]);
   // const jobsPerPage = 9;
   const startIndex = (currentPage - 1) * jobsPerPage;
@@ -119,19 +113,26 @@ const Jobs = (props) => {
   const totalPages = Math.ceil(searchResults.length / jobsPerPage);
   const jobsToDisplay = searchResults.slice(startIndex, endIndex);
   const router = useRouter();
+
+  useEffect(() => {
+    if (currentPage == 2) {
+      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${currentPage}`);
+    }
+  }, [currentPage]);
+
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       const previousPage = currentPage - 1;
-      router.push(`http://localhost:3001/?currentPage=${previousPage}`);
+      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${previousPage}`);
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
-      const nextPage = currentPage + 1
-      router.push(`http://localhost:3001/?currentPage=${nextPage}`);
+      const nextPage = currentPage + 1;
+      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${nextPage}`);
     }
   };
 
@@ -144,13 +145,12 @@ const Jobs = (props) => {
       ? textCapitalize.slice(0, 22) + "..."
       : textCapitalize;
   }
-  
+
   const showDetailsHandler = (item) => {
     router.push({
       pathname: `/${item.id}`,
     });
   };
-
   const maxPaginationButtons = 7; // Maximum number of pagination buttons to display
 
   const generatePaginationButtons = () => {
@@ -162,7 +162,11 @@ const Jobs = (props) => {
             className={`p-2 rounded-full border ${
               index + 1 === currentPage ? "bg-blueColor text-white" : ""
             } hover:bg-blue-500 hover:text-white`}
-            onClick={() => setCurrentPage(index + 1)}
+            onClick={() => {
+              const selectedPage = index + 1;
+              setCurrentPage(selectedPage);
+              router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${selectedPage}`);
+            }}
           >
             {index + 1}
           </button>
@@ -186,7 +190,11 @@ const Jobs = (props) => {
             className={`p-2 rounded-full border ${
               startPage + index === currentPage ? "bg-blueColor text-white" : ""
             } hover:bg-blue-500 hover:text-white`}
-            onClick={() => setCurrentPage(startPage + index)}
+            onClick={() => {
+              const selectedPage = startPage + index;
+              setCurrentPage(selectedPage);
+              router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${selectedPage}`);
+            }}
           >
             {startPage + index}
           </button>
@@ -202,64 +210,66 @@ const Jobs = (props) => {
       ) : (
         <div>
           <div className="jobContainer flex gap-10 justify-center flex-wrap items-center py-10">
-            {jobsToDisplay.length > 0
-              ? jobsToDisplay.map((item) => {
-                  return (
-                    <div
-                      key={item.id}
-                      className="group group/item singleJob w-[300px] p-[20px] bg-white rounded [10px] hover:bg-blueColor shadow-lg shadow-greyIsh-400/700 hover:shadow-lg"
-                    >
-                      <span className="flex justify-between items-center gap-4">
-                        <h1 className="text-[16px] font-semibold text-textColor group-hover:text-white">
-                          {item.title.length > 20
-                            ? item.title.slice(0, 20) + "..."
-                            : item.title}
-                        </h1>
+            {jobsToDisplay.length > 0 ? (
+              jobsToDisplay.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className="group group/item singleJob w-[300px] p-[20px] bg-white rounded [10px] hover:bg-blueColor shadow-lg shadow-greyIsh-400/700 hover:shadow-lg"
+                  >
+                    <span className="flex justify-between items-center gap-4">
+                      <h1 className="text-[16px] font-semibold text-textColor group-hover:text-white">
+                        {item.title.length > 20
+                          ? item.title.slice(0, 20) + "..."
+                          : item.title}
+                      </h1>
+                    </span>
+                    <h6 className="text-[#ccc] flex items-center gap-2">
+                      <MdLocationPin /> {capitalizeFirstLetter(item.location)}
+                    </h6>
+                    <div className="company flex items-center gap-2 p-2">
+                      <div className="image-container w-[70px] h-[70px] border border-gray-500 rounded-lg shadow-md p-1">
+                        {item.image && item.image !== "" ? (
+                          <img
+                            src={item.image}
+                            alt="Company Logo"
+                            className="w-full h-full object-contain"
+                          />
+                        ) : (
+                          <img
+                            src={imageDefault}
+                            alt="Company Logo"
+                            className="w-full h-full object-contain"
+                          />
+                        )}
+                      </div>
+                      <span className="text-[14px] py-[2rem] block group-hover:text-white">
+                        {capitalizeFirstLetter(item.company)}
                       </span>
-                      <h6 className="text-[#ccc] flex items-center gap-2">
-                        <MdLocationPin /> {capitalizeFirstLetter(item.location)}
-                      </h6>
-                      <div className="company flex items-center gap-2 p-2">
-                        <div className="image-container w-[70px] h-[70px] border border-gray-500 rounded-lg shadow-md p-1">
-                          {item.image && item.image !== "" ? (
-                            <img
-                              src={item.image}
-                              alt="Company Logo"
-                              className="w-full h-full object-contain"
-                            />
-                          ) : (
-                            <img
-                              src={imageDefault}
-                              alt="Company Logo"
-                              className="w-full h-full object-contain"
-                            />
-                          )}
-                        </div>
-                        <span className="text-[14px] py-[2rem] block group-hover:text-white">
-                          {capitalizeFirstLetter(item.company)}
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center gap-4 p-3 ">
-                        <div className="flex items-center text-[#cc] gap-1 text-sm ">
-                          <BiTimeFive /> {item.time}
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => {
-                          showDetailsHandler(item);
-                        }}
-                        className="border-[2px] rounded-[10px] block p-[10px] w-full text-[14px] font-semibold text-textColor hover:bg-white group-hover/item:text-textColor group-hover:text-white"
-                      >
-                        <Link href={`/${item.id}`}>Apply Now</Link>
-                      </button>
                     </div>
-                  );
-                })
-              : <div className="text-center mt-8">
-              <h2 className="text-2xl font-semibold text-textColor">
-                No jobs found matching your criteria.
-              </h2>
-            </div>}
+                    <div className="flex justify-between items-center gap-4 p-3 ">
+                      <div className="flex items-center text-[#cc] gap-1 text-sm ">
+                        <BiTimeFive /> {item.time}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        showDetailsHandler(item);
+                      }}
+                      className="border-[2px] rounded-[10px] block p-[10px] w-full text-[14px] font-semibold text-textColor hover:bg-white group-hover/item:text-textColor group-hover:text-white"
+                    >
+                      <Link href={`/${item.id}`}>Apply Now</Link>
+                    </button>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-center mt-8">
+                <h2 className="text-2xl font-semibold text-textColor">
+                  No jobs found matching your criteria.
+                </h2>
+              </div>
+            )}
           </div>
 
           {jobsToDisplay.length > 0 && (

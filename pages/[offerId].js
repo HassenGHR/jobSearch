@@ -53,9 +53,8 @@ const OfferPage = (props) => {
   };
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://Hassen:siV9VBKwMgdIZ4iv@cluster0.qft15hl.mongodb.net/JobOffers?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(process.env.MONGODB_URI);
+
   const db = client.db();
 
   const OffersCollection = db.collection("Offers");
@@ -76,9 +75,8 @@ export async function getStaticProps(context) {
   const offerId = context.params.offerId;
   
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://Hassen:siV9VBKwMgdIZ4iv@cluster0.qft15hl.mongodb.net/JobOffers?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(process.env.MONGODB_URI);
+
   const db = client.db();
 
   const OffersCollection = db.collection("Offers");

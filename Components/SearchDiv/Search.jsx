@@ -27,6 +27,7 @@ const Search = (props) => {
     e.preventDefault();
     props.setSearchData(searchData);
   };
+
   const handleClearAll = () => {
     setSearchData({
       jobTitle: "",
@@ -39,55 +40,47 @@ const Search = (props) => {
   };
 
   return (
-    <div className="searchDiv grid gap-10 bg-blue-200 rounded-[10px] p-[2.5rem] max-w-[800px] mx-auto">
-
-    <form onSubmit={handleSearch} className="w-full max-w-[600px] mx-auto">
-      <div className="firstDiv flex flex-col md:flex-row md:justify-between items-center rounded-[8px] gap-2 bg-white p-5 shadow-lg shadow-greyish-700">
-          <div className="flex gap-2 items-center">
+<div className="searchDiv grid gap-10 bg-blue-200 rounded-[10px] p-[2rem] max-w-[900px] mx-auto">
+      <form onSubmit={handleSearch} className="max-w-screen-md mx-auto">
+        <div className="firstDiv grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex  gap-2">
             <AiOutlineSearch className="text-[25px] icon" />
             <input
               type="text"
               value={searchData.jobTitle}
               onChange={(e) => handleInputChange(e)}
-              name="jobTitle" // Set the name attribute to match the property name
-              className="bg-transparent text-blue-500 focus:outline-none w-[100%]"
+              name="jobTitle"
+              className="bg-transparent text-blue-500 focus:outline-none w-full"
               placeholder="Search Job Here..."
             />
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <BsHouseDoor className="text-[25px] icon" />
             <input
               type="text"
               value={searchData.company}
               onChange={(e) => handleInputChange(e)}
               name="company"
-              className="bg-transparent text-blue-500 focus:outline-none w-[100%]"
+              className="bg-transparent text-blue-500 focus:outline-none w-full"
               placeholder="Search By Company..."
             />
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <CiLocationOn className="text-[25px] icon" />
             <input
               type="text"
               value={searchData.location}
               onChange={(e) => handleInputChange(e)}
               name="location"
-              className="bg-transparent text-blue-500 focus:outline-none w-[100%]"
+              className="bg-transparent text-blue-500 focus:outline-none w-full"
               placeholder="Search By location..."
             />
           </div>
-          <button
-            type="submit"
-            className="bg-blueColor h-full p-5 px-10 rounded-[10px]
-          text-white cursor-pointer hover:bg-blue-300"
-          >
-            Search
-          </button>
         </div>
 
-        <div className="secDiv flex flex-col md:flex-row items-center p-[.5rem] gap-2 justify-center md:justify-end">
-          <div className="singleSearch flex items-center gap-2">
-            <label htmlFor="relevence" className="text-[#808080] font-semibold">
+        <div className="secDiv md:flex md:grid-cols-3 items-center p-[.5rem] gap-3 md:gap-0 justify-center md:justify-center">
+          <div className="singleSearch flex items-center gap-2 p-2">
+            <label htmlFor="relevance" className="text-[#808080] font-semibold">
               Sort by:
             </label>
             <select
@@ -100,7 +93,7 @@ const Search = (props) => {
               <option value="Date de publication">Date de publication</option>
             </select>
           </div>
-          <div className="singleSearch flex items-center gap-2">
+          <div className="singleSearch flex items-center gap-2 p-2">
             <label htmlFor="type" className="text-[#808080] font-semibold">
               Type:
             </label>
@@ -115,7 +108,7 @@ const Search = (props) => {
               <option value="Saisonnier">Saisonnier</option>
             </select>
           </div>
-          <div className="singleSearch flex items-center gap-2">
+          <div className="singleSearch flex items-center gap-2 p-2">
             <label htmlFor="level" className="text-[#808080] font-semibold">
               Level:
             </label>
@@ -131,10 +124,24 @@ const Search = (props) => {
               <option value="Senior">Senior</option>
             </select>
           </div>
-          <span className="text-[#808080] cursor-pointer" onClick={handleClearAll}>
-
-            Clear All
-          </span>
+        </div>
+        <div className="flex grid-col-1 md:justify-end  gap-3 justify-end ">
+          <div className="flex items-center gap-2 mb-2 md:mb-0">
+            <span
+              className="text-[#808080] cursor-pointer"
+              onClick={handleClearAll}
+            >
+              Clear All
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="submit"
+              className="bg-blueColor h-full p-5 px-10 rounded-[10px] text-white cursor-pointer hover:bg-blue-300"
+            >
+              Search
+            </button>
+          </div>
         </div>
       </form>
     </div>

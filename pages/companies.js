@@ -38,9 +38,8 @@ export async function getServerSideProps(context) {
   const skip = (currentPage - 1) * dynamicPageSize;
 ;
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://Hassen:siV9VBKwMgdIZ4iv@cluster0.qft15hl.mongodb.net/JobOffers?retryWrites=true&w=majority"
-  );
+const client = await MongoClient.connect(process.env.MONGODB_URI);
+
   const db = client.db();
   const offeersCollection = db.collection("Offers");
 

@@ -1,4 +1,4 @@
-import "../public/styles/globals.css";
+import "../styles/globals.css";
 import 'mapbox-gl/dist/mapbox-gl.css'; // Your CSS file
 
 function MyApp({ Component, pageProps }) {
