@@ -1,5 +1,8 @@
+// ArticleDiv.js
+
 import React, { useState } from "react";
-import {MdExpandMore} from 'react-icons/md'
+import { MdExpandMore } from 'react-icons/md';
+import styles from './ArticleDiv.module.css';
 
 const ArticleDiv = () => {
   const articles = [
@@ -44,30 +47,29 @@ const ArticleDiv = () => {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel ligula eu urna consequat fringilla.",
     },
   ];
+
   const [displayedArticles, setDisplayedArticles] = useState(6);
 
   const loadMoreArticles = () => {
     setDisplayedArticles(displayedArticles + 6);
   };
+
   return (
-    <div className="container mx-auto mt-10 p-8">
-      <div className="grid grid-cols- md:grid-cols-3 gap-4">
+    <div className={styles.container}>
+      <div className={`${styles.grid} ${styles.container} `}>
         {articles.slice(0, displayedArticles).map((item) => {
           return (
-            <section
-              key={item.title}
-              className="border rounded-lg overflow-hidden shadow-lg p-4"
-            >
+            <section key={item.title} className={styles.article}>
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full rounded-md mb-4"
+                className={styles.image}
               />
-              <h2 className="text-xl font-semibold">{item.title}</h2>
-              <p className="text-gray-600 overflow-hidden h-20 mb-4">
+              <h2 className={styles.title}>{item.title}</h2>
+              <p className={`${styles.text} overflow-hidden h-20 mb-4`}>
                 {item.text}
               </p>
-              <a href="#" className="text-blue-500">
+              <a href="#" className={styles.readMore}>
                 Read More
               </a>
             </section>
@@ -75,29 +77,15 @@ const ArticleDiv = () => {
         })}
       </div>
       {displayedArticles < articles.length && (
-        <div className="flex flex-col items-center mt-4 gap-2">
-        <button
-          className="border-[2px] rounded-[5px] py-[4px] px-[50px] text-[18px] font-semibold text-blueColor hover:bg-white border-blueColor"
-          onClick={loadMoreArticles}
-        >
-          Load More Articles
-        </button>
-        <svg
-          className="inline-block w-6 h-6 ml-2 text-blue-500"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 17.8 11.13"
-        >
-          <path
-            className="stroke-current"
-            d="M1.5,1.5,8.81,9.63,16.3,1.56"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1"
-          />
-        </svg>
-      </div>
-      
+        <div className={styles.flexContainer}>
+          <button
+            className={styles.loadMore}
+            onClick={loadMoreArticles}
+          >
+            Load More Articles
+          </button>
+          <MdExpandMore className={styles.expandIcon} />
+        </div>
       )}
     </div>
   );

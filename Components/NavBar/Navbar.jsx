@@ -27,32 +27,32 @@ const Navbar = () => {
           <li
             className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
           >
-            <Link href="/">Companies</Link>
+            <Link href="/companies">Companies</Link>
           </li>
           <li
             className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
           >
-            <Link href="/">About</Link>
+            <Link href="/about">About</Link>
           </li>
           <li
             className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
           >
-            <Link href="/">Contact</Link>
+            <Link href="/contact">Contact</Link>
           </li>
           <li
             className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
           >
-            <Link href="/">Blog</Link>
+            <Link href="/blog">Blog</Link>
           </li>
           <li
             className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
           >
-            <Link href="/">Login</Link>
+            <Link href="/login">Login</Link>
           </li>
           <li
             className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
           >
-            <Link href="/">Register</Link>
+            <Link href="/register">Register</Link>
           </li>
         </ul>
       </div>
