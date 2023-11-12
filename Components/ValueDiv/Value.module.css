@@ -1,0 +1,137 @@
+/* Value.module.css */
+
+.container {
+  margin-bottom: 2rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 4rem;
+  }
+}
+
+.valueTitle {
+  color: #1c1c1c;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.valuesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  transition: background-color 0.3s ease, border 0.5s ease; /* Added border transition */
+  justify-content: center;
+}
+
+.singleGrid {
+  background-color: #cad5f9;
+  border-radius: 0.375rem;
+  padding: 1rem;
+ 
+  text-align: center;
+  margin: 0.5rem;
+  flex: 1;
+  /* Each item takes full width for small screens */
+  max-width: calc(100% - 1rem);
+  /* Subtract margin for spacing between items */
+  border: 2px solid rgb(108, 173, 182); /* Added border */
+}
+
+.singleGrid:hover {
+  background-color: #f7edf5;
+  border-color: #3498db; /* Border color on hover */
+}
+
+.singleTitle {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.imgDiv {
+  background-color: #dedef8;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  height: 5rem;
+  /* Increase image height */
+  width: 5rem;
+  /* Increase image width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valueTitle {
+  font-size: 1rem;
+  color: #1c1c1c;
+  font-weight: bold;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.textContent {
+  font-size: 0.875rem;
+  color: #1c1c1c;
+  opacity: 0.7;
+  font-weight: 600;
+  margin-top: 0.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+
+.container {
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}
+
+.card {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+  border-radius: 10px;
+  background: url("/logos/testimonial.png");
+}
+
+.heading {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.subHeading {
+  font-size: 25px;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.button {
+  border: 2px solid #0d47a1;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #3498db;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+  background-color: white;
+  color: #2d3748;
+}

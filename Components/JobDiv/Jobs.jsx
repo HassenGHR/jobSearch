@@ -4,31 +4,31 @@ import { MdLocationPin } from "react-icons/md";
 import Louder from "../Louder/Louder";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// import { imageDefault } from "../../public/logos/default.jpg";
+import styles from "./Jobs.module.css"; 
 
 const Jobs = (props) => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchResults, setSearchResults] = useState(props.offers);
-  const jobsPerPage = 9; // Number of jobs to display per page
+  const jobsPerPage = 9; 
 
   const imageDefault = "/logos/default.jpg";
 
   function calculateRelevanceScore(job, jobTitle, location, company) {
-    // Define your scoring logic here
+  
     let relevanceScore = 0;
 
-    // Example: Increase score if job title matches
+   
     if (job.title.toLowerCase().includes(jobTitle.toLowerCase())) {
       relevanceScore += 10;
     }
 
-    // Example: Increase score if location matches
+    
     if (job.location.toLowerCase().includes(location.toLowerCase())) {
       relevanceScore += 3;
     }
 
-    // Example: Increase score if type matches
+ 
     if (job.company.toLowerCase() === company.toLowerCase()) {
       relevanceScore += 5;
     }
@@ -42,7 +42,7 @@ const Jobs = (props) => {
   }, [jobTitle, company, location, sortSearch, type, level]);
 
   useEffect(() => {
-    // Filter jobs based on search criteria
+ 
     const filteredJobs = props.offers.filter((job) => {
       const jobMatchesCriteria =
         (!jobTitle ||
@@ -52,7 +52,6 @@ const Jobs = (props) => {
         (!location ||
           job.location.toLowerCase().includes(location.toLowerCase()));
 
-      // Additional filtering based on the 'type' parameter
       const typeMatchesCriteria =
         !type || job.type.toLowerCase() === type.toLowerCase();
 
@@ -61,7 +60,6 @@ const Jobs = (props) => {
       let levelMatchesCriteria = true;
 
       if (experience !== null) {
-        // Determine the experience level based on the criteria
         if (level === "Débutant") {
           levelMatchesCriteria = job.experience >= 0 && job.experience <= 1;
         } else if (level === "Junior") {
@@ -72,12 +70,10 @@ const Jobs = (props) => {
           levelMatchesCriteria = job.experience >= 10;
         }
       } else {
-        // If experience is null, exclude the levelMatchesCriteria check
         levelMatchesCriteria = true;
       }
 
-      // Display jobs that match jobMatchesCriteria, typeMatchesCriteria,
-      // and levelMatchesCriteria (based on experience level)
+   
       return jobMatchesCriteria && typeMatchesCriteria && levelMatchesCriteria;
     });
 
@@ -209,60 +205,54 @@ const Jobs = (props) => {
         <Louder />
       ) : (
         <div>
-          <div className="flex gap-10 justify-center flex-wrap items-center py-10">
+          <div className={styles.jobContainer}>
             {jobsToDisplay.length > 0 ? (
-              jobsToDisplay.map((item) => {
-                return (
-                  <div
-                    key={item.id}
-                    className="w-[300px] p-[20px] bg-white rounded [10px] hover:bg-blueColor shadow-lg shadow-greyIsh-400/700 hover:shadow-lg"
-                  >
-                    <span className="flex justify-between items-center gap-4">
-                      <h1 className="text-[16px] font-semibold text-textColor group-hover:text-white">
-                        {item.title.length > 20
-                          ? item.title.slice(0, 20) + "..."
-                          : item.title}
-                      </h1>
+              jobsToDisplay.map((item) => (
+                <div
+                  key={item.id}
+                  className={styles.singleJob}
+                  onClick={() => showDetailsHandler(item)}
+                >
+                  <span className="flex justify-between items-center gap-4">
+                    <h1 className={styles.jobTitle}>
+                      {item.title.length > 20
+                        ? item.title.slice(0, 20) + "..."
+                        : item.title}
+                    </h1>
+                  </span>
+                  <h6 className={styles.jobLocation}>
+                    <MdLocationPin /> {capitalizeFirstLetter(item.location)}
+                  </h6>
+                  <div className="company flex items-center gap-2 p-2">
+                    <div className={styles.imageContainer}>
+                      {item.image && item.image !== "" ? (
+                        <img
+                          src={item.image}
+                          alt="Company Logo"
+                          className={styles.image}
+                        />
+                      ) : (
+                        <img
+                          src={imageDefault}
+                          alt="Company Logo"
+                          className={styles.image}
+                        />
+                      )}
+                    </div>
+                    <span className={styles.companyName}>
+                      {capitalizeFirstLetter(item.company)}
                     </span>
-                    <h6 className="text-[#ccc] flex items-center gap-2">
-                      <MdLocationPin /> {capitalizeFirstLetter(item.location)}
-                    </h6>
-                    <div className="flex items-center gap-2 p-2">
-                      <div className=" w-[70px] h-[70px] border border-gray-500 rounded-lg shadow-md p-1">
-                        {item.image && item.image !== "" ? (
-                          <img
-                            src={item.image}
-                            alt="Company Logo"
-                            className="w-full h-full object-contain"
-                          />
-                        ) : (
-                          <img
-                            src={imageDefault}
-                            alt="Company Logo"
-                            className="w-full h-full object-contain"
-                          />
-                        )}
-                      </div>
-                      <span className="text-[14px] py-[2rem] block group-hover:text-white">
-                        {capitalizeFirstLetter(item.company)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center gap-4 p-3 ">
-                      <div className="flex items-center text-[#cc] gap-1 text-sm ">
-                        <BiTimeFive /> {item.time}
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => {
-                        showDetailsHandler(item);
-                      }}
-                      className="border-[2px] rounded-[10px] block p-[10px] w-full text-[14px] font-semibold text-textColor hover:bg-white group-hover/item:text-textColor group-hover:text-white"
-                    >
-                      <Link href={`/${item.id}`}>Apply Now</Link>
-                    </button>
                   </div>
-                );
-              })
+                  <div className={styles.jobDetails}>
+                    <div className={styles.jobTime}>
+                      <BiTimeFive /> {item.time}
+                    </div>
+                  </div>
+                  <button className={styles.applyButton}>
+                    <Link href={`/${item.id}`}>Apply Now</Link>
+                  </button>
+                </div>
+              ))
             ) : (
               <div className="text-center mt-8">
                 <h2 className="text-2xl font-semibold text-textColor">
@@ -273,10 +263,9 @@ const Jobs = (props) => {
           </div>
 
           {jobsToDisplay.length > 0 && (
-            // Render pagination only if there are search results
-            <div className="flex justify-center mt-4">
+            <div className={styles.pagination}>
               <button
-                className="mr-2 p-2 rounded-full border hover:bg-blue-500 hover:text-white"
+                className={`${styles.paginationButton} mr-2`}
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
@@ -284,7 +273,7 @@ const Jobs = (props) => {
               </button>
               <ul className="flex gap-2">{generatePaginationButtons()}</ul>
               <button
-                className="ml-2 p-2 rounded-full border hover:bg-blue-500 hover:text-white"
+                className={`${styles.paginationButton} ml-2`}
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >

@@ -1,6 +1,6 @@
+// SearchFields.js
 import React, { useState } from "react";
-
-
+import styles from "./SearchFields.module.css";
 
 const SearchFields = (props) => {
   const secteursC = props.secteurs
@@ -43,14 +43,14 @@ const SearchFields = (props) => {
   };
 
   return (
-    <div className="searchDiv flex flex-col items-center md:flex-row md:items-center bg-blue-200 rounded-lg p-10 md:p-5 space-y-4 md:space-y-0 md:space-x-4 justify-center">
-      <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 max-w-[600px] mx-auto">
+    <div className={styles.searchDiv}>
+      <div className={styles.inputContainer}>
         <input
           type="text"
           name="company"
           value={searchCompData.company}
           onChange={(e) => handleInputChange(e)}
-          className="rounded h-[40px] p-2 border border-gray-300 placeholder-gray-500"
+          className={styles.inputField}
           placeholder="Keywords ..."
           autoComplete="off"
         />
@@ -59,7 +59,7 @@ const SearchFields = (props) => {
           name="location"
           value={searchCompData.location}
           onChange={(e) => handleInputChange(e)}
-          className="rounded h-[40px] p-2 border border-gray-300 placeholder-gray-500"
+          className={styles.inputField}
           placeholder="Places, region, state..."
           autoComplete="off"
         />
@@ -67,7 +67,7 @@ const SearchFields = (props) => {
           value={searchCompData.sectors}
           onChange={(e) => handleInputChange(e)}
           name="sectors"
-          className="rounded h-[40px] p-2 border border-gray-300"
+          className={styles.selectField}
         >
           <option value="" disabled>
             Field of activity
@@ -78,11 +78,10 @@ const SearchFields = (props) => {
             </option>
           ))}
         </select>
+        <button className={styles.button} onClick={handleSearch}>
+          Search
+        </button>
       </div>
-        <button className="bg-blueColor h-[40px] p-1 px-10 rounded-[10px] text-white cursor-pointer hover:bg-blue-300" onClick={handleSearch}>
-
-        Search
-      </button>
     </div>
   );
 };

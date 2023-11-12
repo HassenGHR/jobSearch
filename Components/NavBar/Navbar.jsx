@@ -1,89 +1,78 @@
-import React, { useState } from "react";
-import styles from "./Navbar.module.css";
-import Link from "next/link";
+import Link from 'next/link';
+import { useState } from 'react';
+import styles from './Navbar.module.css';
 
-const Navbar = () => {
+
+export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const openMenu = () => setIsOpen(!isOpen);
 
   return (
-    <div className={styles.navBar}>
-      <div className={styles.logoDiv}>
-        <h1 className={styles.logo}>
-          <strong>Job</strong>Search
-        </h1>
-      </div>
-
-      <div className={`${styles.menu} ${isOpen ? styles["menu--open"] : ""}`}>
-        <ul className={styles.menuList}>
-          <li
-            className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
+    <>
+      <header className={styles.header}>
+        <nav className={styles.navbar}>
+          <Link href="/" className={styles.navlogo}>
+            JobSearch
+          </Link>
+          <ul
+            className={
+              isOpen === false
+                ? styles.navmenu
+                : styles.navmenu + ' ' + styles.active
+            }
           >
-            <Link href="/">Jobs</Link>
-          </li>
-          <li
-            className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
+            <li className={styles.navitem}>
+              <Link href='/' onClick={openMenu} className={styles.navlink}>
+              Jobs
+              </Link>
+            </li>
+            <li className={styles.navitem}>
+              <Link href='/companies' onClick={openMenu} className={styles.navlink}>
+              Companies
+              </Link>
+            </li>
+            <li className={styles.navitem}>
+              <Link href='/about' onClick={openMenu} className={styles.navlink}>
+              About
+              </Link>
+            </li>
+            <li className={styles.navitem}>
+              <Link href='/contact' onClick={openMenu} className={styles.navlink}>
+              Contact
+              </Link>
+            </li>
+            <li className={styles.navitem}>
+              <Link href='/blog' onClick={openMenu} className={styles.navlink}>
+              Blog
+              </Link>
+            </li>
+            <li className={styles.navitem}>
+              <Link href='/login' onClick={openMenu} className={styles.navlink}>
+              Login
+              </Link>
+            </li>
+            <li className={styles.navitem}>
+              <Link href='/register' onClick={openMenu} className={styles.navlink}>
+              Register
+              </Link>
+            </li>
+          </ul>
+          <button
+            className={
+              isOpen === false
+                ? styles.hamburger
+                : styles.hamburger + ' ' + styles.active
+            }
+            onClick={openMenu}
           >
-            <Link href="/companies">Companies</Link>
-          </li>
-          <li
-            className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
-          >
-            <Link href="/about">About</Link>
-          </li>
-          <li
-            className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
-          >
-            <Link href="/contact">Contact</Link>
-          </li>
-          <li
-            className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
-          >
-            <Link href="/blog">Blog</Link>
-          </li>
-          <li
-            className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
-          >
-            <Link href="/login">Login</Link>
-          </li>
-          <li
-            className={`${styles.menuItem} text-[#6f6f6f] hover:text-blueColor`}
-          >
-            <Link href="/register">Register</Link>
-          </li>
-        </ul>
-      </div>
-
-      <div className={`${styles.menuIcon} md:hidden`} onClick={toggleMenu}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          {isOpen ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          )}
-        </svg>
-      </div>
-    </div>
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
+          </button>
+        </nav>
+      </header>
+     
+    </>
   );
-};
-
-export default Navbar;
+}

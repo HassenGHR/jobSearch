@@ -1,0 +1,153 @@
+/* Jobs.module.css */
+
+.jobContainer {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.singleJob {
+  position: relative;
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd; /* Add a border */
+  border-radius: 10px;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+}
+
+.singleJob:hover {
+  background-color: #3498db;
+  color: white;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+.jobTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.jobLocation {
+  display: flex;
+  align-items: center;
+  color: #ccc;
+  font-size: 14px;
+  gap: 2px;
+}
+
+.imageContainer {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  padding: 1px;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+}
+
+.companyName {
+  font-size: 14px;
+  padding-top: 2rem;
+}
+
+.jobDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+}
+
+.jobTime {
+  color: #ccc;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.applyButton {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.applyButton:hover {
+  background-color: white;
+  color: #2d3748;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.paginationButton {
+  padding: 2px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.paginationButton:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.paginationButton.active {
+  background-color: #3498db;
+  color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .singleJob {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .image-container {
+    width: 100%;
+  }
+
+  .jobTitle,
+  .companyName,
+  .jobTime {
+    font-size: 14px;
+  }
+
+  .applyButton {
+    font-size: 12px;
+  }
+}

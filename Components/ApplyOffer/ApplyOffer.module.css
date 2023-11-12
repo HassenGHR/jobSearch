@@ -1,98 +1,145 @@
+/* Default styles */
 .container {
-    width: 85%;
-    margin: auto;
-    background-color: #fff;
+  display: flex;
+  gap: 1rem;
+  padding-top: 3rem;
+}
+
+.offerAside,
+.detailsAside {
+  background-color: #f0f4f8;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+.firstcard {
+  margin-right: 1rem;
+}
+
+.imageContainer {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 1px;
+}
+
+.imgDefault {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.textTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.applyDiv {
+  margin-bottom: 1rem;
+}
+
+.defaultIcon{
+  display: flex;
+  align-items: center;
+  margin-top: 0.2rem;
+}
+.locationIcon{
+  display: flex;
+  align-items: center;
+  margin-top: 0.2rem;
+}
+.calendarIcon{
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  color: #4a5568; 
+}
+.companyTitle,
+.locationText {
+  color: #4a5568;
+}
+
+.dateText {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.descriptionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.descriptionText {
+  margin-top: 0.5rem;
+  color: #4a5568;
+}
+
+.linkDiv {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.applyButton {
+  background-color: #4299e1;
+  color: #fff;
+  padding: 0.25rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.applyButton:hover {
+  background-color: #3182ce;
+}
+
+.lineHr {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detailsDiv {
+  margin-bottom: 1rem;
+}
+
+.detailsTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.detailsContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.detailsText {
+  color: #4a5568;
+}
+
+.mapDiv {
+  margin-top: 1.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
   }
-  
-  .flexContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: center
-  }
-  
-  .aside {
-    background-color: #f0f4f8;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .mb6 {
+
+  .offerAside,
+  .detailsAside {
     margin-bottom: 1.5rem;
   }
-  
-  .imageContainer {
-    width: 70px;
-    height: 70px;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    padding: 0.1rem;
+
+  .firstcard {
+    margin-right: 0;
   }
-  
-  .img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: 600;
-  }
-  
-  .textIcon {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 0.25rem;
-    fill: #718096;
-  }
-  
-  .textGray600 {
-    color: #718096;
-  }
-  
-  .textLgFontSemibold {
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-  
-  .textBlueColor {
-    color: #3498db;
-  }
-  
-  .bgBlueColorHP1Px5Py2Rounded10PxTextWhiteCursorPointerHoverBgBlue300 {
-    background-color: #3498db;
-    padding: 1px 5px 2px;
-    border-radius: 10px;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .chakraWrapCssI6bazn {
-    /* Your styles for chakraWrapCssI6bazn */
-  }
-  
-  .chakraWrapListCssWah4g8 {
-    /* Your styles for chakraWrapListCssWah4g8 */
-  }
-  
-  .chakraWrapListitemCss1yp4ln {
-    /* Your styles for chakraWrapListitemCss1yp4ln */
-  }
-  
-  .my4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .my6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  .applyButton{
-    display: flex;
-    gap: 1rem;
-    align-items: center
-  }
-  
+}

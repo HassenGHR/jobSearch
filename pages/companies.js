@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 import SearchFields from "../Components/Search/Search";
-import Navbar from "../Components/NavBar/Navbar";
 import DummyDataCard from "../Components/Companies/Companies";
 import ValueCompany from "../Components/ValueCompanyDiv/ValueCompanyDiv";
-import Footer from "../Components/FooterDiv/Footer";
 import { MongoClient } from "mongodb";
+import Layout from "../Components/Layout/Layout";
 
 const Companies = (props) => {
   const [searchData, setSearchData] = useState({});
 
   return (
-    <div className="w-[85%] m-auto bg-white">
-      <Navbar />
+    <Layout>
       <SearchFields
         secteurs={props.extractedData}
         setSearchCompData={setSearchData}
@@ -23,8 +21,8 @@ const Companies = (props) => {
         
       />
       <ValueCompany />
-      <Footer />
-    </div>
+
+    </Layout>
   );
 };
 

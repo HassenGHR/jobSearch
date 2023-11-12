@@ -1,0 +1,44 @@
+/* ValueCompany.module.css */
+
+.container {
+    margin-bottom: 4rem;
+    margin-top: 6rem;
+  }
+  
+  .card {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem;
+    border-radius: 10px;
+    background:  url("/logos/Tbackground.png");
+  }
+  
+  .heading {
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .subHeading {
+    font-size: 25px;
+    font-weight: bold;
+    color: #2d3748;
+  }
+  
+  .button {
+    border: 2px solid #0d47a1;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #3498db;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: white;
+    color: #2d3748;
+  }
+  

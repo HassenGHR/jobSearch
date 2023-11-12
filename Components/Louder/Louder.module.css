@@ -1,0 +1,22 @@
+/* Louder.module.css */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sectionDiv {
+    width: 4rem;
+    height: 4rem;
+    border-top: 0.25rem solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

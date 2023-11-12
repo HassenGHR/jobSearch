@@ -1,0 +1,134 @@
+
+.footer {
+    width: 100%;
+    padding: 1rem;
+    @media (min-width: 768px) {
+      padding: 1rem;
+    }
+    @media (min-width: 1024px) {
+      padding: 1rem;
+    }
+    background-color: #0d47a1;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    @media (min-width: 400px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    gap: 2rem;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 2rem;
+    
+  }
+  
+  
+  /* Column Styles */
+  .column {
+    margin-bottom: 4px;
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
+  
+  /* Logo Styles */
+  .logoDiv {
+    text-align: center;
+  }
+  
+  .logo {
+    font-size: 25px;
+    color: white;
+    padding-bottom: 2px;
+    @media (min-width: 768px) {
+      font-size: 32px;
+      padding-bottom: 4px;
+    }
+  }
+  
+  /* Description Styles */
+  .description {
+    color: white;
+    opacity: 0.7;
+    font-size: 14px;
+    text-align: center;
+    @media (min-width: 768px) {
+      font-size: 16px;
+      
+    }
+  }
+  
+  /* Title Styles */
+  .divTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding-bottom: 2px;
+    @media (min-width: 768px) {
+      padding-bottom: 4px;
+    }
+  }
+  
+  /* List Styles */
+  .list {
+    display: grid;
+    gap: 2px;
+    font-size: 14px;
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
+  
+  .listItem {
+    color: white;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  
+  .listItem:hover {
+    opacity: 1;
+  }
+  
+  /* Contact Info Styles */
+  .contactInfo {
+    text-align: center;
+  }
+  
+  .contactEmail {
+    font-size: 14px;
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
+  
+  /* Icons Styles */
+  .icons {
+    display: flex;
+    gap: 4px;
+  }
+  
+  /* Icon Styles */
+  .icon {
+    background-color: white;
+    padding: 3px;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d47a1;
+  }
+  

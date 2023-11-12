@@ -1,31 +1,35 @@
-
+// Map.js
 
 import React, { useEffect } from "react";
 import mapboxgl from "mapbox-gl";
+import styles from "./Map.module.css";
 
 const Map = (props) => {
   useEffect(() => {
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
-    mapboxgl.setRTLTextPlugin(
-      "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
-      null,
-      true // Lazy load the plugin
-    );
+    if (!mapboxgl.getRTLTextPluginStatus()) {
+      mapboxgl.setRTLTextPlugin(
+        process.env.NEXT_PUBLIC_MAPBOX_RTL_PLUGIN,
+        null,
+        true
+      );
+    }
+
     const map = new mapboxgl.Map({
       container: "map",
       style: process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL,
-      center: [props.longitude, props.latitude], // Replace with your coordinates
+      center: [props.longitude, props.latitude],
       zoom: 12,
       attributionControl: false,
     });
+
+    // Add a marker at the specified coordinates
+    new mapboxgl.Marker().setLngLat([props.longitude, props.latitude]).addTo(map);
   }, [props.longitude, props.latitude]);
 
-
   return (
-    <div className="container mx-auto p-4 bg-gray-100 border rounded-lg shadow-md">
-       <div id="map" className="w-full h-64 md:h-96 lg:h-72"></div>
-      {/* Other map components go here */}
-    {" "}
+    <div className={styles.container}>
+      <div id="map" className={styles.mapSection}></div>
     </div>
   );
 };

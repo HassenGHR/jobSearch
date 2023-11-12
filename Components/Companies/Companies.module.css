@@ -1,0 +1,159 @@
+
+.container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+  }
+  
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  
+  /* Responsive styles for medium-sized screens */
+  @media screen and (max-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media screen and (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Responsive styles for extra small screens */
+  @media screen and (max-width: 480px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .card {
+    border: 3px solid #ddd; /* Add a border */
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease-in-out; /* Add transition for hover effect */
+  }
+  
+  /* Hover effect for the cards */
+  .card:hover {
+    transform: scale(1.05); /* Increase size on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add a larger box shadow on hover */
+  }
+  
+  .defaultImage {
+    background-size: cover;
+    background-position: center;
+    height: 120px;
+  }
+  
+  .companyImage {
+    padding: 1rem;
+  }
+  
+  .defaultImage {
+    background-size: cover;
+    background-position: center;
+    height: 120px;
+  }
+  
+  .companyImage {
+    padding: 1rem;
+  }
+  
+  .imageDiv {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .imageContainer {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.25rem;
+  }
+  
+  .wFull {
+    width: 100%;
+  }
+  
+  .logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .companyName {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  
+  .textLgFontSemibold {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .ellipsis {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+  
+  .viewOffers {
+    display: block;
+    color: #0066cc;
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+  
+  .noResults {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-span: 4;
+  }
+  
+  .noResultsText {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+  
+  .paginationButton {
+    padding: 0.5rem 1rem;
+    border: 1px solid #0066cc;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    color: #0066cc;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .paginationButton:hover {
+    background-color: #0066cc;
+    color: #fff;
+  }
+  
+  .paginationList {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+
+  

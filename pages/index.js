@@ -1,22 +1,18 @@
-import "tailwindcss/tailwind.css";
-import React, { useEffect, useState } from "react";
-import NavBar from "../Components/NavBar/Navbar";
+import React, { useState } from "react";
 import Search from "../Components/SearchDiv/Search";
 import Jobs from "../Components/JobDiv/Jobs";
 import Value from "../Components/ValueDiv/Value";
-import Footer from "../Components/FooterDiv/Footer";
 import { MongoClient } from "mongodb";
+import Layout from "../Components/Layout/Layout";
 
 function Home(props) {
-  const [searchData, setSearchData] = useState({})
+  const [searchData, setSearchData] = useState({});
   return (
-    <div className="w-[85%] m-auto bg-white">
-      <NavBar />
+    <Layout>
       <Search setSearchData={setSearchData} />
-      <Jobs offers={props.offers} queryData = {searchData} />
+      <Jobs offers={props.offers} queryData={searchData} />
       <Value />
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 
@@ -40,8 +36,7 @@ export function formatDateAgo(date) {
 
 export async function getServerSideProps(context) {
   const currentPage = context.query.currentPage || 1;
-  
-  
+
   const BASE_PAGE_SIZE = 10;
 
   // Calculate dynamic page size based on the current page
@@ -71,7 +66,7 @@ export async function getServerSideProps(context) {
         desc: offer._source.ficheName,
         type: offer._source.contractType,
         company: offer._source.employeeRaisonSociale,
-        experience:offer._source.experience,
+        experience: offer._source.experience,
         image: (() => {
           const photo = offer._source.photo;
 
@@ -87,6 +82,5 @@ export async function getServerSideProps(context) {
     // revalidate: 3600,
   };
 }
-
 
 export default Home;

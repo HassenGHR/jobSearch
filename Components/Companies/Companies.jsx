@@ -4,6 +4,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { BiSolidBusiness } from "react-icons/bi";
 import Louder from "../Louder/Louder";
 import { useRouter } from "next/router";
+import styles from './Companies.module.css';
 
 const DummyDataCard = (props) => {
   const router = useRouter();
@@ -116,74 +117,73 @@ const DummyDataCard = (props) => {
       : textCapitalize;
   }
 
+  
+
+  // ... (other imports)
+  
   return (
     <div>
       {loading ? (
         <Louder />
       ) : (
         <div>
-          <div className="container mx-auto mt-20">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className={styles.container}>
+            <div className={styles.grid}>
               {companiesToDisplay.length > 0 ? (
                 companiesToDisplay.map((item) => {
                   return (
                     <section
                       key={item.id}
-                      className="border rounded-lg overflow-hidden shadow-lg"
+                      className={styles.card}
                     >
                       <div
-                        className="bg-cover bg-center h-32"
-                        style={
-                          item.cover && item.cover !== ""
-                            ? { backgroundImage: `url(${item.cover})` }
-                            : { backgroundImage: `url(${coverDefault})` }
-                        }
+                        className={styles.defaultImage}
+                        style={{
+                          backgroundImage: `url(${item.cover || coverDefault})`,
+                        }}
                       ></div>
-                      <div className="p-4">
-                        <div className="flex justify-center">
+                      <div className={styles.companyImage}>
+                        <div className={styles.imageDiv}>
                           <a href="#">
-                            <div className="image-container w-[70px] h-[70px] border border-gray-500 rounded-lg shadow-md p-1">
+                            <div className={styles.imageContainer}>
                               {item.photo && item.photo !== "" ? (
                                 <img
                                   src={item.photo}
                                   alt="Company Logo"
-                                  className="w-full h-full object-contain"
+                                  className={styles.wFull}
                                 />
                               ) : (
                                 <img
                                   src={imageDefault}
                                   alt="Company Logo"
-                                  className="w-full h-full object-contain"
+                                  className={styles.logo}
                                 />
                               )}
                             </div>
                           </a>
                         </div>
-                        <div className="text-center my-2">
-                          <a href="#" className="text-lg font-semibold">
+                        <div className={styles.companyName}>
+                          <a href="#" className={styles.textLgFontSemibold}>
                             {capitalizeFirstLetter(item.compName)}
                           </a>
                         </div>
-                        <p className="ellipsis my-1 flex items-center gap-2">
+                        <p className={styles.ellipsis}>
                           <BiSolidBusiness />
                           {capitalizeFirstLetter(item.secteur.split("-")[1])}
                         </p>
-                        <p className="ellipsis my-1 flex items-center gap-2">
+                        <p className={styles.ellipsis}>
                           <MdLocationPin />
-                          {item.address2 &&
-                            capitalizeFirstLetter(item.address2)}
+                          {item.address2 && capitalizeFirstLetter(item.address2)}
                         </p>
-                        {/* Display the count for the corresponding employeeRaisonSociale */}
-                        <p className="ellipsis my-1 flex items-center gap-2">
+                        <p className={styles.ellipsis}>
                           <HiUserGroup />
-
                           {item.totalAvailablePlaceCount > 1
                             ? `job offers ${item.totalAvailablePlaceCount}`
                             : `job offer ${item.totalAvailablePlaceCount}`}
                         </p>
                         <a
                           href="#"
-                          className="block text-blue-600 font-semibold mt-2"
+                          className={styles.viewOffers}
                         >
                           View Offers
                         </a>
@@ -192,8 +192,8 @@ const DummyDataCard = (props) => {
                   );
                 })
               ) : (
-                <div className="flex items-center justify-center col-span-4">
-                  <h2 className="text-2xl font-semibold text-textColor">
+                <div className={styles.noResults}>
+                  <h2 className={styles.noResultsText}>
                     No companies found matching your criteria.
                   </h2>
                 </div>
@@ -201,18 +201,17 @@ const DummyDataCard = (props) => {
             </div>
           </div>
           {companiesToDisplay.length > 0 && (
-            // Render pagination only if there are search results
-            <div className="pagination flex justify-center mt-4">
+            <div className={styles.pagination}>
               <button
-                className="mr-2 p-2 rounded-full border hover:bg-blue-500 hover:text-white"
+                className={styles.paginationButton}
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
                 Previous
               </button>
-              <ul className="flex gap-2">{generatePaginationButtons()}</ul>
+              <ul className={styles.paginationList}>{generatePaginationButtons()}</ul>
               <button
-                className="ml-2 p-2 rounded-full border hover:bg-blue-500 hover:text-white"
+                className={styles.paginationButton}
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
@@ -224,6 +223,7 @@ const DummyDataCard = (props) => {
       )}
     </div>
   );
+  
 };
 
 export default DummyDataCard;

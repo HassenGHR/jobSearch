@@ -1,0 +1,70 @@
+/* SearchFields.module.css */
+
+.searchDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #a0daff;
+  border-radius: 10px;
+  padding: 2.5rem;
+  margin: auto;
+  max-width: 800px; /* Set the maximum width */
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%; /* Adjust max-width to make it responsive */
+  margin: auto;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.inputField,
+.selectField,
+.button {
+  width: 100%;
+  border-radius: 5px;
+  height: 2rem;
+}
+
+.inputField,
+.selectField {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  height: 2rem;
+}
+
+.button {
+  background-color: #2196f3;
+  height: 40px;
+  padding: 1px 10px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #90caf9;
+}
+
+@media (min-width: 768px) {
+  .inputContainer {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .inputField,
+  .selectField {
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .button {
+    height: 40px;
+    padding: 1px 10px;
+  }
+}

@@ -1,20 +1,21 @@
+// ValueCompany.jsx
+
 import React from "react";
-import "tailwindcss/tailwind.css";
+import styles from "./ValueCompany.module.css";
 
 const ValueCompany = () => {
   return (
-    <div className="mb-[4rem] mt-[6rem]">
-      
-      <div className="card1 mt-[2rem] flex justify-between bg-blueColor p-[5rem] rounded-[10px]">
+    <div className={styles.container}>
+      <div className={styles.card}>
         <div>
-          <h1 className="text-blueColor text-[30px] font-bold">
+          <h1 className={styles.heading}>
             Ready to Showcase Your Company?
           </h1>
-          <h2 className="text-textColor text-[25px] font-bold">
+          <h2 className={styles.subHeading}>
             Get Started Today!
           </h2>
         </div>
-        <button className="border-[2px] rounded-[10px] py-[4px] px-[50px] text-[18px] font-semibold text-blueColor hover:bg-white border-blueColor">
+        <button className={styles.button}>
           Get Started
         </button>
       </div>
@@ -23,3 +24,4 @@ const ValueCompany = () => {
 };
 
 export default ValueCompany;
+
