@@ -209,13 +209,13 @@ const Jobs = (props) => {
         <Louder />
       ) : (
         <div>
-          <div className="jobContainer flex gap-10 justify-center flex-wrap items-center py-10">
+          <div className="flex gap-10 justify-center flex-wrap items-center py-10">
             {jobsToDisplay.length > 0 ? (
               jobsToDisplay.map((item) => {
                 return (
                   <div
                     key={item.id}
-                    className="group group/item singleJob w-[300px] p-[20px] bg-white rounded [10px] hover:bg-blueColor shadow-lg shadow-greyIsh-400/700 hover:shadow-lg"
+                    className="w-[300px] p-[20px] bg-white rounded [10px] hover:bg-blueColor shadow-lg shadow-greyIsh-400/700 hover:shadow-lg"
                   >
                     <span className="flex justify-between items-center gap-4">
                       <h1 className="text-[16px] font-semibold text-textColor group-hover:text-white">
@@ -227,8 +227,8 @@ const Jobs = (props) => {
                     <h6 className="text-[#ccc] flex items-center gap-2">
                       <MdLocationPin /> {capitalizeFirstLetter(item.location)}
                     </h6>
-                    <div className="company flex items-center gap-2 p-2">
-                      <div className="image-container w-[70px] h-[70px] border border-gray-500 rounded-lg shadow-md p-1">
+                    <div className="flex items-center gap-2 p-2">
+                      <div className=" w-[70px] h-[70px] border border-gray-500 rounded-lg shadow-md p-1">
                         {item.image && item.image !== "" ? (
                           <img
                             src={item.image}
@@ -274,7 +274,7 @@ const Jobs = (props) => {
 
           {jobsToDisplay.length > 0 && (
             // Render pagination only if there are search results
-            <div className="pagination flex justify-center mt-4">
+            <div className="flex justify-center mt-4">
               <button
                 className="mr-2 p-2 rounded-full border hover:bg-blue-500 hover:text-white"
                 onClick={handlePreviousPage}
