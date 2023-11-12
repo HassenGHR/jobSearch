@@ -49,10 +49,20 @@
   align-items: center;
   margin-top: 0.2rem;
 }
+.defaultIcon svg {
+  width: 1rem; /* Set your desired width */
+  height: 1rem; /* Set your desired height */
+  margin-right: 0.25rem; /* Set your desired margin */
+}
 .locationIcon{
   display: flex;
   align-items: center;
   margin-top: 0.2rem;
+}
+.locationIcon svg {
+  width: 1rem; /* Set your desired width */
+  height: 1rem; /* Set your desired height */
+  margin-right: 0.25rem; /* Set your desired margin */
 }
 .calendarIcon{
   display: flex;
@@ -60,7 +70,19 @@
   margin-top: 0.5rem;
   color: #4a5568; 
 }
-.companyTitle,
+.calendarIcon svg {
+  width: 1rem; /* Set your desired width */
+  height: 1rem; /* Set your desired height */
+  margin-right: 0.25rem; /* Set your desired margin */
+}
+
+/* Calendar text */
+.calendarSvg {
+  color: #555555; /* Set your desired color */
+}
+.companyTitle{
+  color: #4a5568;
+}
 .locationText {
   color: #4a5568;
 }
@@ -69,6 +91,7 @@
   font-size: 1.125rem;
   font-weight: 600;
 }
+
 
 .descriptionTitle {
   font-size: 1.125rem;
