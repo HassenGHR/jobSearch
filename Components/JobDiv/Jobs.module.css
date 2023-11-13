@@ -102,6 +102,28 @@
   background-color: white;
   color: #2d3748;
 }
+.currentContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Pagination Button Styles */
+.currentBtn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.currentBtn:hover {
+  background-color: #4299e1;
+  color: #ffffff;
+}
+
+.currentBtnColor {
+  background-color: #4299e1;
+  color: #ffffff;
+}
 
 .pagination {
   display: flex;

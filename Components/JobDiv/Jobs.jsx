@@ -155,9 +155,9 @@ const Jobs = (props) => {
       return Array.from({ length: totalPages }, (_, index) => (
         <li key={index}>
           <button
-            className={`p-2 rounded-full border ${
-              index + 1 === currentPage ? "bg-blueColor text-white" : ""
-            } hover:bg-blue-500 hover:text-white`}
+            className={`${styles.currentBtn} ${
+              index + 1 === currentPage ? styles.currentBtnColor : ""
+            }`}
             onClick={() => {
               const selectedPage = index + 1;
               setCurrentPage(selectedPage);
@@ -178,14 +178,14 @@ const Jobs = (props) => {
         startPage + maxPaginationButtons - 1 <= totalPages
           ? startPage + maxPaginationButtons - 1
           : totalPages;
-
+  
       // Generate the pagination buttons for the calculated range
       return Array.from({ length: endPage - startPage + 1 }, (_, index) => (
         <li key={startPage + index}>
           <button
-            className={`p-2 rounded-full border ${
-              startPage + index === currentPage ? "bg-blueColor text-white" : ""
-            } hover:bg-blue-500 hover:text-white`}
+            className={`${styles.currentBtn} ${
+              startPage + index === currentPage ? styles.currentBtnColor : ""
+            }`}
             onClick={() => {
               const selectedPage = startPage + index;
               setCurrentPage(selectedPage);
@@ -198,6 +198,7 @@ const Jobs = (props) => {
       ));
     }
   };
+  
 
   return (
     <div>
@@ -254,7 +255,7 @@ const Jobs = (props) => {
                 </div>
               ))
             ) : (
-              <div className="text-center mt-8">
+              <div className="emptyJob text-center mt-8">
                 <h2 className="text-2xl font-semibold text-textColor">
                   No jobs found matching your criteria.
                 </h2>
@@ -271,8 +272,9 @@ const Jobs = (props) => {
               >
                 Previous
               </button>
-              <ul className="flex gap-2">{generatePaginationButtons()}</ul>
-              <button
+              <ul className={styles.currentContainer}>
+      {generatePaginationButtons()}
+    </ul>              <button
                 className={`${styles.paginationButton} ml-2`}
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
