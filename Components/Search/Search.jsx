@@ -1,8 +1,16 @@
 // SearchFields.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SearchFields.module.css";
+import { useRouter } from 'next/router';
+
 
 const SearchFields = (props) => {
+  const router = useRouter(); // Get the router object
+
+  const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => {
+    setCurrentPage(props.page);
+  }, [props.page]);
   const secteursC = props.secteurs
     .map((comp) => {
       const secteur = comp.secteur;
@@ -34,7 +42,19 @@ const SearchFields = (props) => {
   const handleSearch = async (e) => {
     e.preventDefault();
     props.setSearchCompData(searchCompData);
+    const queryParams = {
+      currentPage,
+      prop1: searchCompData.company,
+      prop2: searchCompData.location,
+      prop3: searchCompData.sectors,
+    };
 
+    // Use the router object to navigate to the specified link
+    router.push({
+      pathname: '/companies',
+      query: queryParams,
+    });
+  
     setSearchCompData({
       company: "",
       location: "",
@@ -51,7 +71,7 @@ const SearchFields = (props) => {
           value={searchCompData.company}
           onChange={(e) => handleInputChange(e)}
           className={styles.inputField}
-          placeholder="Keywords ..."
+          placeholder="Company Name"
           autoComplete="off"
         />
         <input
@@ -60,7 +80,7 @@ const SearchFields = (props) => {
           value={searchCompData.location}
           onChange={(e) => handleInputChange(e)}
           className={styles.inputField}
-          placeholder="Places, region, state..."
+          placeholder="Location"
           autoComplete="off"
         />
         <select
@@ -78,9 +98,10 @@ const SearchFields = (props) => {
             </option>
           ))}
         </select>
-        <button className={styles.button} onClick={handleSearch}>
-          Search
-        </button>
+       
+          <button className={styles.button} onClick={handleSearch}>
+            Search
+          </button>
       </div>
     </div>
   );

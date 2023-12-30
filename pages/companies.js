@@ -8,16 +8,20 @@ import Layout from "../Components/Layout/Layout";
 
 const Companies = (props) => {
   const [searchData, setSearchData] = useState({});
+  const [currentPage, setcurrentPage] = useState(1);
+
 
   return (
     <Layout>
       <SearchFields
+      page = {currentPage}
         secteurs={props.extractedData}
         setSearchCompData={setSearchData}
       />
       <DummyDataCard
         data={props.extractedData}
         queryCompData={searchData}
+        setPage = {setcurrentPage}
         
       />
       <ValueCompany />
@@ -26,12 +30,44 @@ const Companies = (props) => {
   );
 };
 
+const buildMongoQuery = ({
+  prop1,
+  prop2,
+  prop3,
+ 
+}) => {
+  const filter = {};
+
+  if (prop1) {
+    filter["_source.employeeRaisonSociale"] = {
+      $regex: new RegExp(prop1, "i"),
+    };
+  }
+
+  if (prop2) {
+    filter["_source.township"] = {
+      $regex: new RegExp(prop2, "i"),
+    };
+  }
+
+  if (prop3) {
+    filter["_source.secteur"] = {
+      $regex: new RegExp(prop3, "i"),
+    };
+  }
+
+  return filter;
+};
+
 export async function getServerSideProps(context) {
   const currentPage = context.query.currentPage || 1;
   const BASE_PAGE_SIZE = 10;
 
   // Calculate dynamic page size based on the current page
   const dynamicPageSize = BASE_PAGE_SIZE + (currentPage - 1) * BASE_PAGE_SIZE;
+
+  const { prop1, prop2, prop3} = context.query
+  const filter = buildMongoQuery({ prop1, prop2, prop3})
 
   const skip = (currentPage - 1) * dynamicPageSize;
 ;
@@ -42,7 +78,7 @@ const client = await MongoClient.connect(process.env.MONGODB_URI);
   const offeersCollection = db.collection("Offers");
 
   const offers = await offeersCollection
-    .find()
+    .find(filter)
     .skip(skip)
     .limit(dynamicPageSize)
     .toArray();
@@ -138,7 +174,7 @@ const client = await MongoClient.connect(process.env.MONGODB_URI);
         structureMobile: offer._source.structureMobile,
         totalAvailablePlaceCount: offer._source.availablePlaceCount, // Pass the value directly
       })),
-      revalidate: 3600,
+      // revalidate: 3600,
     },
   };
 }

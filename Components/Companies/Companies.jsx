@@ -17,28 +17,22 @@ const DummyDataCard = (props) => {
   useEffect(() => {
     setCurrentPage(1);
   }, [company, location, sectors]);
- 
+  useEffect(() => {
+    props.setPage(currentPage);
+  }, [currentPage]);
  
   useEffect(() => {
-    const filteredComps = props.data.filter((comp) => {
-      const compMatchesCriteria =
-        (!company ||
-          comp.compName
-            .split(" ")
-            .some((word) =>
-              company.toLowerCase().includes(word.toLowerCase())
-            )) &&
-        (!location ||
-          comp.address2.toLowerCase().includes(location.toLowerCase())) &&
-        (!sectors ||
-          comp.secteur.toLowerCase().includes(sectors.toLowerCase()));
-      return compMatchesCriteria;
-    });
+    const filteredComps = props.data
     setSearchResults(filteredComps);
     setLoading(false);
-  }, [company, location, sectors, props.data]);
+  }, [props.data]);
+  useEffect(() => {
+    if (currentPage == 2) {
+      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/companies?currentPage=${currentPage}`
+      );
+    }
+  }, [currentPage]);
 
-  // Number of comps to display per page
 
   const totalPages = Math.ceil(props.data.length / companiesPerPage);
   const startIndex = (currentPage - 1) * companiesPerPage;
@@ -60,8 +54,9 @@ const DummyDataCard = (props) => {
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      const nextPage = currentPage + 1;
       setCurrentPage(currentPage + 1);
+      const nextPage = currentPage + 1;
+      
       router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/companies?currentPage=${nextPage}`);
     }
   };

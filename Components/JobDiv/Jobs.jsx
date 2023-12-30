@@ -14,23 +14,7 @@ const Jobs = (props) => {
 
   const imageDefault = "/logos/default.jpg";
 
-  function calculateRelevanceScore(job, jobTitle, location, company) {
-    let relevanceScore = 0;
-
-    if (job.title.toLowerCase().includes(jobTitle.toLowerCase())) {
-      relevanceScore += 10;
-    }
-
-    if (job.location.toLowerCase().includes(location.toLowerCase())) {
-      relevanceScore += 3;
-    }
-
-    if (job.company.toLowerCase() === company.toLowerCase()) {
-      relevanceScore += 5;
-    }
-
-    return relevanceScore;
-  }
+  
   const { jobTitle, company, location, sortSearch, type, level } =
     props.queryData;
   useEffect(() => {
