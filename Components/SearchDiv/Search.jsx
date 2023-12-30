@@ -1,13 +1,22 @@
 // Search.jsx
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsHouseDoor } from "react-icons/bs";
 import { CiLocationOn } from "react-icons/ci";
+
 import "tailwindcss/tailwind.css";
 import styles from "./Search.module.css";
+import Link from "next/link";
 
 const Search = (props) => {
+
+
+  const [currentPage, setCurrentPage] = useState(1)
+  useEffect(() => {
+    setCurrentPage( props.page)
+  }, [props.page]); 
+
   const [searchData, setSearchData] = useState({
     jobTitle: "",
     company: "",
@@ -45,107 +54,105 @@ const Search = (props) => {
     <div className={styles.searchDiv}>
       <form onSubmit={handleSearch} className={styles.maxWScreenMd}>
         <div className={styles.searchCols}>
-        <div className={styles.firstDiv}>
-          <div className={styles.icon}>
-            <AiOutlineSearch className={styles.text25} />
-            <input
-              type="text"
-              value={searchData.jobTitle}
-              onChange={(e) => handleInputChange(e)}
-              name="jobTitle"
-              className={styles.inputSearch}
-              placeholder="Search Job Here..."
-            />
+          <div className={styles.firstDiv}>
+            <div className={styles.icon}>
+              <AiOutlineSearch className={styles.text25} />
+              <input
+                type="text"
+                value={searchData.jobTitle}
+                onChange={(e) => handleInputChange(e)}
+                name="jobTitle"
+                className={styles.inputSearch}
+                placeholder="Search Job Here..."
+              />
+            </div>
+            <div className={styles.icon}>
+              <BsHouseDoor className={styles.text25} />
+              <input
+                type="text"
+                value={searchData.company}
+                onChange={(e) => handleInputChange(e)}
+                name="company"
+                className={styles.inputSearch}
+                placeholder="Search By Company..."
+              />
+            </div>
+            <div className={styles.icon}>
+              <CiLocationOn className={styles.text25} />
+              <input
+                type="text"
+                value={searchData.location}
+                onChange={(e) => handleInputChange(e)}
+                name="location"
+                className={styles.inputSearch}
+                placeholder="Search By location..."
+              />
+            </div>
           </div>
-          <div className={styles.icon}>
-            <BsHouseDoor className={styles.text25} />
-            <input
-              type="text"
-              value={searchData.company}
-              onChange={(e) => handleInputChange(e)}
-              name="company"
-              className={styles.inputSearch}
-              placeholder="Search By Company..."
-            />
-          </div>
-          <div className={styles.icon}>
-            <CiLocationOn className={styles.text25} />
-            <input
-              type="text"
-              value={searchData.location}
-              onChange={(e) => handleInputChange(e)}
-              name="location"
-              className={styles.inputSearch}
-              placeholder="Search By location..."
-            />
+
+          <div className={styles.secDiv}>
+            <div className={styles.singleSearch}>
+              <label htmlFor="relevance" className={styles.text808080}>
+                Sort by:
+              </label>
+              <select
+                name="sort"
+                value={searchData.sort}
+                onChange={(e) => handleInputChange(e)}
+                className={styles.optionSearch}
+              >
+                <option value="Pertinence">Pertinence</option>
+                <option value="Date de publication">Date de publication</option>
+              </select>
+            </div>
+            <div className={styles.singleSearch}>
+              <label htmlFor="type" className={styles.text808080}>
+                Type:
+              </label>
+              <select
+                name="type"
+                value={searchData.type}
+                onChange={(e) => handleInputChange(e)}
+                className={styles.optionSearch}
+              >
+                <option value="CDD">CDD</option>
+                <option value="CDI">CDI</option>
+                <option value="Saisonnier">Saisonnier</option>
+              </select>
+            </div>
+            <div className={styles.singleSearch}>
+              <label htmlFor="level" className={styles.text808080}>
+                Level:
+              </label>
+              <select
+                name="level"
+                value={searchData.level}
+                onChange={(e) => handleInputChange(e)}
+                className={styles.optionSearch}
+              >
+                <option value="Débutant">Débutant</option>
+                <option value="Junior">Junior</option>
+                <option value="Confirmé">Confirmé</option>
+                <option value="Senior">Senior</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div className={styles.secDiv}>
-          <div className={styles.singleSearch}>
-            <label htmlFor="relevance" className={styles.text808080}>
-              Sort by:
-            </label>
-            <select
-              name="sort"
-              value={searchData.sort}
-              onChange={(e) => handleInputChange(e)}
-              className={styles.optionSearch}
-            >
-              <option value="Pertinence">Pertinence</option>
-              <option value="Date de publication">Date de publication</option>
-            </select>
-          </div>
-          <div className={styles.singleSearch}>
-            <label htmlFor="type" className={styles.text808080}>
-              Type:
-            </label>
-            <select
-              name="type"
-              value={searchData.type}
-              onChange={(e) => handleInputChange(e)}
-              className={styles.optionSearch}
-            >
-              <option value="CDD">CDD</option>
-              <option value="CDI">CDI</option>
-              <option value="Saisonnier">Saisonnier</option>
-            </select>
-          </div>
-          <div className={styles.singleSearch}>
-            <label htmlFor="level" className={styles.text808080}>
-              Level:
-            </label>
-            <select
-              name="level"
-              value={searchData.level}
-              onChange={(e) => handleInputChange(e)}
-              className={styles.optionSearch}
-            >
-              <option value="Débutant">Débutant</option>
-              <option value="Junior">Junior</option>
-              <option value="Confirmé">Confirmé</option>
-              <option value="Senior">Senior</option>
-            </select>
-          </div>
-        </div>
-        </div>
-       
         <div className={styles.submit}>
           <div className={styles.clear}>
-            <span
-              className={styles.clearSpan}
-              onClick={handleClearAll}
-            >
+            <span className={styles.clearSpan} onClick={handleClearAll}>
               Clear All
             </span>
           </div>
           <div className={styles.search}>
-            <button
-              type="submit"
-              className={styles.searchButton}
+            <Link
+              href={`/?currentPage=${currentPage}&prop1=${searchData.jobTitle}&prop2=${searchData.company}&prop3=${searchData.location}&prop4=${searchData.sort}&prop5=${searchData.type}&prop6=${searchData.level}`}
             >
-              Search
-            </button>
+              <button type="submit" className={styles.searchButton}>
+                Search
+              </button>
+            </Link>
           </div>
         </div>
       </form>

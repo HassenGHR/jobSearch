@@ -4,31 +4,27 @@ import { MdLocationPin } from "react-icons/md";
 import Louder from "../Louder/Louder";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import styles from "./Jobs.module.css"; 
+import styles from "./Jobs.module.css";
 
 const Jobs = (props) => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchResults, setSearchResults] = useState(props.offers);
-  const jobsPerPage = 9; 
+  const jobsPerPage = 9;
 
   const imageDefault = "/logos/default.jpg";
 
   function calculateRelevanceScore(job, jobTitle, location, company) {
-  
     let relevanceScore = 0;
 
-   
     if (job.title.toLowerCase().includes(jobTitle.toLowerCase())) {
       relevanceScore += 10;
     }
 
-    
     if (job.location.toLowerCase().includes(location.toLowerCase())) {
       relevanceScore += 3;
     }
 
- 
     if (job.company.toLowerCase() === company.toLowerCase()) {
       relevanceScore += 5;
     }
@@ -38,72 +34,18 @@ const Jobs = (props) => {
   const { jobTitle, company, location, sortSearch, type, level } =
     props.queryData;
   useEffect(() => {
+    props.setPage(currentPage);
+  }, [currentPage]);
+  useEffect(() => {
     setCurrentPage(1);
   }, [jobTitle, company, location, sortSearch, type, level]);
 
   useEffect(() => {
- 
-    const filteredJobs = props.offers.filter((job) => {
-      const jobMatchesCriteria =
-        (!jobTitle ||
-          job.title.toLowerCase().includes(jobTitle.toLowerCase())) &&
-        (!company ||
-          job.company.toLowerCase().includes(company.toLowerCase())) &&
-        (!location ||
-          job.location.toLowerCase().includes(location.toLowerCase()));
+    const filteredJobs = props.offers;
+    setSearchResults(filteredJobs);
 
-      const typeMatchesCriteria =
-        !type || job.type.toLowerCase() === type.toLowerCase();
-
-      const experience = +job.experience;
-
-      let levelMatchesCriteria = true;
-
-      if (experience !== null) {
-        if (level === "Débutant") {
-          levelMatchesCriteria = job.experience >= 0 && job.experience <= 1;
-        } else if (level === "Junior") {
-          levelMatchesCriteria = job.experience >= 2 && job.experience <= 4;
-        } else if (level === "Confirmé") {
-          levelMatchesCriteria = job.experience >= 5 && job.experience <= 9;
-        } else if (level === "Senior") {
-          levelMatchesCriteria = job.experience >= 10;
-        }
-      } else {
-        levelMatchesCriteria = true;
-      }
-
-   
-      return jobMatchesCriteria && typeMatchesCriteria && levelMatchesCriteria;
-    });
-
-    if (sortSearch === "Date de publication") {
-      const sortedJobs = [...filteredJobs];
-      sortedJobs.sort((a, b) => new Date(b.time) - new Date(a.time));
-      setSearchResults(sortedJobs);
-    } else if (sortSearch === "Pertinence") {
-      const scoredJobs = filteredJobs.map((job) => {
-        const relevanceScore = calculateRelevanceScore(
-          job,
-          jobTitle,
-          location,
-          company
-        );
-        return { ...job, relevanceScore };
-      });
-
-      // Sort the scored jobs by relevance
-      scoredJobs.sort((a, b) => b.relevanceScore - a.relevanceScore);
-
-      // Update the search results in the parent component
-      setSearchResults(scoredJobs);
-    } else {
-      // If no sorting option is selected, set searchResults to filteredJobs
-      setSearchResults(filteredJobs);
-    }
     setLoading(false);
-  }, [props.queryData, props.offers]);
-  // const jobsPerPage = 9;
+  }, [props.offers]);
   const startIndex = (currentPage - 1) * jobsPerPage;
   const endIndex = startIndex + jobsPerPage;
   const totalPages = Math.ceil(searchResults.length / jobsPerPage);
@@ -112,7 +54,9 @@ const Jobs = (props) => {
 
   useEffect(() => {
     if (currentPage == 2) {
-      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${currentPage}`);
+      router.push(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${currentPage}`
+      );
     }
   }, [currentPage]);
 
@@ -120,7 +64,9 @@ const Jobs = (props) => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       const previousPage = currentPage - 1;
-      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${previousPage}`);
+      router.push(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${previousPage}`
+      );
     }
   };
 
@@ -128,7 +74,9 @@ const Jobs = (props) => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
       const nextPage = currentPage + 1;
-      router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${nextPage}`);
+      router.push(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${nextPage}`
+      );
     }
   };
 
@@ -161,7 +109,9 @@ const Jobs = (props) => {
             onClick={() => {
               const selectedPage = index + 1;
               setCurrentPage(selectedPage);
-              router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${selectedPage}`);
+              router.push(
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${selectedPage}`
+              );
             }}
           >
             {index + 1}
@@ -178,7 +128,7 @@ const Jobs = (props) => {
         startPage + maxPaginationButtons - 1 <= totalPages
           ? startPage + maxPaginationButtons - 1
           : totalPages;
-  
+
       // Generate the pagination buttons for the calculated range
       return Array.from({ length: endPage - startPage + 1 }, (_, index) => (
         <li key={startPage + index}>
@@ -189,7 +139,9 @@ const Jobs = (props) => {
             onClick={() => {
               const selectedPage = startPage + index;
               setCurrentPage(selectedPage);
-              router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${selectedPage}`);
+              router.push(
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/?currentPage=${selectedPage}`
+              );
             }}
           >
             {startPage + index}
@@ -198,7 +150,6 @@ const Jobs = (props) => {
       ));
     }
   };
-  
 
   return (
     <div>
@@ -273,8 +224,9 @@ const Jobs = (props) => {
                 Previous
               </button>
               <ul className={styles.currentContainer}>
-      {generatePaginationButtons()}
-    </ul>              <button
+                {generatePaginationButtons()}
+              </ul>{" "}
+              <button
                 className={`${styles.paginationButton} ml-2`}
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}

@@ -118,8 +118,6 @@ const DummyDataCard = (props) => {
   }
 
   
-
-  // ... (other imports)
   
   return (
     <div>
